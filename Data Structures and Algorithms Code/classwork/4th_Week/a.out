@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+int cookies(int k, vector<int> A)
+{
+// this is to create a min heap
+priority_queue <int, vector<int>, greater<int> > heap;
+int n = A.size();
+// pushing elements to the min heap
+for(int i=0;i<n;i++)heap.push(A[i]);
+int count=0;
+while((heap.empty()==false)&&(heap.top()<k)&&(heap.size()>1))
+{
+int x= heap.top();
+heap.pop();
+int y= heap.top();
+heap.pop();
+heap.push(x+2*y);
+count++;
+}
+if(heap.top()<k)return -1;
+else return count;
+  
+}
+int main()
+{
+vector<int> v;
+int n,k,x;
+cin>>n>>k;
+for(int i=0;i<n;i++)
+{
+cin>>x;
+v.push_back(x);
+}
+cout<<cookies(k,v);
+return 0;
+}
